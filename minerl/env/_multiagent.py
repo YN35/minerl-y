@@ -38,23 +38,16 @@ class _MultiAgentEnv(gym.Env):
     """
     The MineRLEnv class, a gym environment which implements stepping, and resetting, for the MineRL
     simulator from an environment specification.
-
-
     THIS CLASS SHOULD NOT BE INSTANTIATED DIRECTLY
     USE ENV SPEC.
-
         Example:
             To actually create a MineRLEnv. Use any one of the package MineRL environments (Todo: Link.)
             literal blocks::
-
                 import minerl
                 import gym
-
                 env = gym.make('MineRLTreechop-v0') # Makes a minerl environment.
-
                 # Use env like any other OpenAI gym environment.
                 # ...
-
                 # Alternatively:
                 env = gym.make('MineRLTreechop-v0') # makes a default treechop environment (with treechop-specific action and observation spaces)
     
@@ -137,9 +130,7 @@ class _MultiAgentEnv(gym.Env):
 
     def seed(self, seed=None, seed_spaces=True):
         """Seeds the environment!
-
         This also seeds the aciton_space and observation_space sampling.
-
         Note:
         THIS MUST BE CALLED BEFORE :code:`env.reset()`
         
@@ -156,43 +147,27 @@ class _MultiAgentEnv(gym.Env):
     def make_interactive(self, port, max_players=10, realtime=True):
         """
         Enables human interaction with the environment.
-
         To interact with the environment add `make_interactive` to your agent's evaluation code
         and then run the `minerl.interactor.`
-
         For example:
-
         .. code-block:: python
-
             env = gym.make('MineRL...')
-
             # set the environment to allow interactive connections on port 6666
             # and slow the tick speed to 6666.
             env.make_interactive(port=6666, realtime=True)
-
             # reset the env
             env.reset()
-
             # interact as normal.
             ...
-
-
         Then while the agent is running, you can start the interactor with the following command.
-
         .. code-block:: bash
-
             python3 -m minerl.interactor 6666 # replace with the port above.
-
-
         The interactor will disconnect when the mission resets, but you can connect again with the same command.
         If an interactor is already started, it won't need to be relaunched when running the commnad a second time.
-
-
         Args:
             port (int):  The interaction port
             realtime (bool, optional): If we should slow ticking to real time.. Defaults to True.
             max_players (int): The maximum number of players
-
         """
         self._is_interacting = True
         self._is_real_time = realtime
@@ -386,12 +361,8 @@ class _MultiAgentEnv(gym.Env):
 
     def noop_action(self):
         """Gets the no-op action for the environment.
-
         In addition one can get the no-op/default action directly from the action space.
-
             env.action_space.noop()
-
-
         Returns:
             Any: A no-op action in the env's space.
         """
@@ -448,9 +419,7 @@ class _MultiAgentEnv(gym.Env):
     def reset(self) -> Any:
         """
         Reset the environment.
-
         Sets-up the Env from its specification (called everytime the env is reset.)
-
         Returns:
             The first observation of the environment. 
         """
@@ -478,7 +447,6 @@ class _MultiAgentEnv(gym.Env):
             # the port/ip of the master agent send the remaining XMLS.
 
             self._send_mission(self.instances[0], agent_xmls[0], self._get_token(0, ep_uid))  # Master
-            time.sleep(10)
             if self.task.agent_count > 1:
                 mc_server_ip, mc_server_port = self._TO_MOVE_find_ip_and_port(self.instances[0],
                                                                               self._get_token(1, ep_uid))
@@ -505,9 +473,7 @@ class _MultiAgentEnv(gym.Env):
 
     def _setup_agent_xmls(self, ep_uid: str) -> List[etree.Element]:
         """Generates the XML for an episode.
-
         THIS SHOULD EVENTUALLY BE DEPRECATED FOR FULL JINJA TEMPALTING!
-
         Returns:
             str: The XML for an episode.
         """
@@ -599,10 +565,8 @@ class _MultiAgentEnv(gym.Env):
 
     def _send_mission(self, instance: MinecraftInstance, mission_xml_etree: etree.Element, token_in: str) -> None:
         """Sends the XML to the given instance.
-
         Args:
             instance (MinecraftInstance): The instance to which to send the xml
-
         Raises:
             socket.timeout: If the mission cannot be sent.
         """
@@ -839,5 +803,3 @@ class _MultiAgentEnv(gym.Env):
 
     def _clean_connection(self):
         pass
-
-    
