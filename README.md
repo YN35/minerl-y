@@ -18,7 +18,7 @@ Python package providing easy to use gym environments and a simple data api for 
 
 With JDK-8 installed run this command
 ```
-pip3 install --upgrade minerl
+pip install git+https://github.com/YN35/minerl-y.git
 ```
 
 ## Basic Usage
